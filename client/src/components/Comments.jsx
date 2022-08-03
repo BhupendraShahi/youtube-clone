@@ -1,4 +1,7 @@
-import React from "react";
+import { Button } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Comment from "./Comment";
 
@@ -26,22 +29,59 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const Comments = () => {
-    return (
-        <Container>
-            <NewComment>
-                <Avatar src="" />
-                <Input placeholder="Add a comment..." />
-            </NewComment>
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
-        </Container>
-    );
+const Comments = ({ videoId }) => {
+
+  const { currentUser } = useSelector((state) => state.user);
+
+  const [comments, setComments] = useState([]);
+
+  
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axios.get(`/comments/${videoId}`);
+        setComments(res.data);
+      } catch (err) { }
+    };
+    fetchComments();
+  }, [videoId]);
+
+  //TODO: ADD NEW COMMENT FUNCTIONALITY
+
+  const handleChange = (e) => {
+    setComments([e.target.value, ...comments]);
+  }
+
+  const handleComment = async (e) => {
+    e.preventDefault();
+
+    const res = await axios.post(`/comments`, {
+      desc: comments[0],
+    })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+  }
+
+
+  return (
+    <Container>
+      <NewComment>
+        <Avatar src={currentUser.img} />
+        <Input
+          placeholder="Add a comment..."
+          name="desc"
+          onChange={handleChange}
+        />
+        <Button onClick={handleComment}>comment</Button>
+      </NewComment>
+      {comments.map(comment => (
+        <Comment key={comment._id} comment={comment} />
+      ))}
+    </Container>
+  );
 };
 
 export default Comments;
