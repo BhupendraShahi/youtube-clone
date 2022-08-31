@@ -112,13 +112,16 @@ const SignIn = () => {
   //TODO: REGISTER FUNCTIONALITY
   const handleRegister = async (e) => {
     e.preventDefault();
-    
+
     await axios.post("/auth/signup", { name, email, password })
       .then((res) => {
         setName("");
         setEmail("");
         setPassword("");
         alert("User Created!");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 

@@ -34,6 +34,7 @@ const Comments = ({ videoId }) => {
   const { currentUser } = useSelector((state) => state.user);
 
   const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
 
   
 
@@ -47,22 +48,19 @@ const Comments = ({ videoId }) => {
     fetchComments();
   }, [videoId]);
 
-  //TODO: ADD NEW COMMENT FUNCTIONALITY
+  
+  const handleComment = async () => {
+    const data = {
+      desc: newComment,
+      videoId
+    }
 
-  const handleChange = (e) => {
-    setComments([e.target.value, ...comments]);
-  }
-
-  const handleComment = async (e) => {
-    e.preventDefault();
-
-    const res = await axios.post(`/comments`, {
-      desc: comments[0],
-    })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
+    const res = await axios
+      .post("/comments", data)
+      .then(res => setComments([res.data, ...comments])) 
+      .catch(err => console.error(err));
+    
+    setNewComment('')
   }
 
 
@@ -73,7 +71,7 @@ const Comments = ({ videoId }) => {
         <Input
           placeholder="Add a comment..."
           name="desc"
-          onChange={handleChange}
+          onChange={(e) => setNewComment(e.target.value)}
         />
         <Button onClick={handleComment}>comment</Button>
       </NewComment>

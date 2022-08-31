@@ -65,7 +65,7 @@ const Button = styled.button`
   padding: 10px 20px;
   font-weight: 500;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.soft};
+  background-color: ${props => props.primary ? "palevioletred" : "white"};
   color: ${({ theme }) => theme.textSoft};
 `;
 const Label = styled.label`
@@ -89,6 +89,7 @@ const Upload = ({ setOpen }) => {
     };
 
     const handleTags = (e) => {
+        e.preventDefault();
         setTags(e.target.value.split(","));
     };
 
@@ -172,7 +173,7 @@ const Upload = ({ setOpen }) => {
                     type="text"
                     name="tags"
                     placeholder="Separate the tags with commas."
-                    onChance={handleTags}
+                    onChange={handleTags}
                 />
                 <Label>Image:</Label>
                 {imgPerc > 0 ? (

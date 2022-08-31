@@ -17,8 +17,13 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { getAuth, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { logout } from "../redux/userSlice";
+import { useDispatch } from "react-redux";
+
 const Container = styled.div`
   flex: 1;
   background-color: ${({ theme }) => theme.bgLighter};
@@ -31,6 +36,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   padding: 18px 26px;
 `;
+
 const Logo = styled.div`
   display: flex;
   align-items: center;
@@ -61,6 +67,7 @@ const Hr = styled.hr`
 `;
 
 const Login = styled.div``;
+
 const Button = styled.button`
   padding: 5px 15px;
   background-color: transparent;
@@ -85,6 +92,20 @@ const Title = styled.h2`
 const Menu = ({ darkMode, setDarkMode }) => {
     const { currentUser } = useSelector((state) => state.user);
 
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            localStorage.clear();
+            dispatch(logout());
+            console.log("signout successful");
+            
+        }).catch((error) => {
+            console.log("error");
+        });
+    }
+
     return (
         <Container>
             <Wrapper>
@@ -107,7 +128,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
                     </Item>
                 </Link>
                 <Link
-                    to="subscriptions"
+                    to={ currentUser? "subscriptions":"signin"}
                     style={{ textDecoration: "none", color: "inherit" }}
                 >
                     <Item>
@@ -181,6 +202,19 @@ const Menu = ({ darkMode, setDarkMode }) => {
                     <SettingsBrightnessOutlinedIcon />
                     {darkMode ? "Light" : "Dark"} Mode
                 </Item>
+                {currentUser &&
+                    <>
+                        <Hr />
+                        <Link to="/" style={{ textDecoration: "none" }}>
+                            <Button onClick={handleLogout}>
+                                <LogoutIcon />
+                                Logout
+                            </Button>
+                        </Link>
+                        <Hr />
+                    </>
+                }
+
             </Wrapper>
         </Container>
     );

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { format } from "timeago.js";
+import { useSelector } from "react-redux";
+
 
 
 const Container = styled.div`
@@ -55,6 +57,7 @@ const Info = styled.div`
 `;
 
 const Card = ({ type, video }) => {
+  const { currentUser } = useSelector((state) => state.user);
   const [channel, setChannel] = useState({});
 
   useEffect(() => {
@@ -66,7 +69,7 @@ const Card = ({ type, video }) => {
   }, [video.userId]);
 
   return (
-    <Link to={`/video/${video._id}`} style={{ textDecoration: "none" }}>
+    <Link to={currentUser ? `/video/${video._id}`:`/signin`} style={{ textDecoration: "none" }}>
       <Container type={type}>
         <Image
           type={type}
