@@ -55,7 +55,7 @@ const Comments = ({ videoId }) => {
       videoId
     }
 
-    const res = await axios
+    await axios
       .post("/comments", data)
       .then(res => setComments([res.data, ...comments])) 
       .catch(err => console.error(err));
