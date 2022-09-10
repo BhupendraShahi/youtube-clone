@@ -23,7 +23,7 @@ The client/frontend is hosted on Netlify and server/backend is hosted on Heroku.
 3. Firebase storage is used to store the videos and images. Then the link of images and videos is stored in the mongoDB.
 
 # Screenshots
-[Screenshot from 2022-09-09 20-51-27](https://user-images.githubusercontent.com/62903302/189466356-9e161eec-efe8-4efe-aebe-f5f2fc913580.png)
+![Screenshot from 2022-09-09 20-51-27](https://user-images.githubusercontent.com/62903302/189466356-9e161eec-efe8-4efe-aebe-f5f2fc913580.png)
 ![Screenshot from 2022-09-09 20-51-32](https://user-images.githubusercontent.com/62903302/189466369-0f9d3644-0f1e-404a-b44b-907ab8be079b.png)
 ![Screenshot from 2022-09-09 20-52-17](https://user-images.githubusercontent.com/62903302/189466378-701ea3f3-9b92-43cd-bede-7841aef22026.png)
 ![Screenshot from 2022-09-09 20-52-54](https://user-images.githubusercontent.com/62903302/189466382-da7af44c-f8b3-4f66-a338-8b06257a936d.png)![Screenshot from 2022-09-09 20-55-05](https://user-images.githubusercontent.com/62903302/189466384-ffda46b6-dc6f-4550-bc5a-af7f65ea2dd3.png)
