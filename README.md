@@ -16,12 +16,12 @@ The client/frontend is hosted on Netlify and server/backend is hosted on Heroku.
 2. Styling is done using React Components.
 3. JWT and Firebase authentication are used for authentication.
 4. Redux is used for state management.
+5. Axios
 
 # Backend
 1. Made using Node.js and Express.js.
 2. Connection is established with mongoDB to store all the data.
-3. Firebase storage is used to store the videos and images. Then the link of images and videos is stored in the mongoDB.
-
+3. Firebase storage is used to store the videos and images.
 # Screenshots
 ![Screenshot from 2022-09-09 20-51-32](https://user-images.githubusercontent.com/62903302/189466369-0f9d3644-0f1e-404a-b44b-907ab8be079b.png)
 
