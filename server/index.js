@@ -23,9 +23,10 @@ const connect = () => {
 };
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://bright-sorbet-4d9206.netlify.app',
   methods: 'GET, POST, PUT, DELETE',
   optionsSuccessStatus: 200, 
+  credentials: true,
   header: ['Cross-Origin-Opener-Policy', 'same-origin']   
 };
 
